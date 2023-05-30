@@ -46,11 +46,7 @@ public class Player : Character
 
         //horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (isAttack)
-        {
-            rb.velocity = Vector2.zero;
-            return;
-        }
+        
 
         if (isGrounded)
         {
@@ -150,6 +146,12 @@ public class Player : Character
 
     public void Attack()
     {
+
+        if (isAttack)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
         ChangeAnim("attack");
         isAttack = true;
         Invoke(nameof(ResetAttack), 0.5f);
@@ -159,6 +161,7 @@ public class Player : Character
 
     public void Throw()
     {
+       
         ChangeAnim("throw");
         isAttack = true;
         Invoke(nameof(ResetAttack), 0.5f);
