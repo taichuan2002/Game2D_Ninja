@@ -14,12 +14,14 @@ public class Player : Character
     [SerializeField] private Kunai kunaiPrefab;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject attackArea;
+    [SerializeField] private GameObject ThrowPoint;
 
 
     
     private bool isGrounded = true ;
     private bool isJumping = false;
     private bool isAttack = false;
+    private bool isThrow = false;
     private bool isDeath = false;
     private float horizontal;
 
@@ -46,7 +48,8 @@ public class Player : Character
 
         //horizontal = Input.GetAxisRaw("Horizontal");
 
-        
+       
+
 
         if (isGrounded)
         {
@@ -146,7 +149,6 @@ public class Player : Character
 
     public void Attack()
     {
-
         if (isAttack)
         {
             rb.velocity = Vector2.zero;
@@ -161,11 +163,16 @@ public class Player : Character
 
     public void Throw()
     {
-       
+        if (isThrow)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
         ChangeAnim("throw");
-        isAttack = true;
-        Invoke(nameof(ResetAttack), 0.5f);
-
+        isThrow = true;
+        Invoke(nameof(ResetThrow), 0.5f);
+        ActiveThrow();
+        Invoke(nameof(DeActiveThrow), 0.5f);
         Instantiate(kunaiPrefab, throwPoint.position,
             throwPoint.rotation);
 
@@ -176,6 +183,12 @@ public class Player : Character
         ChangeAnim("ilde");
         isAttack = false;
        
+    }
+    private void ResetThrow()
+    {
+        ChangeAnim("throw");
+        isThrow = false;
+
     }
 
     public void Jump()
@@ -203,10 +216,18 @@ public class Player : Character
     {
         attackArea.SetActive(true);
     }
-
     private void DeActiveAttack()
     {
         attackArea.SetActive(false);
+    }
+    private void ActiveThrow()
+    {
+        ThrowPoint.SetActive(true);
+    }
+
+    private void DeActiveThrow()
+    {
+        ThrowPoint.SetActive(false);
     }
 
     public void SetMove(float horizontal)
