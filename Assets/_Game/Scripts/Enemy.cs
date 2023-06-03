@@ -121,6 +121,7 @@ public class Enemy : Character
             ChangeDiriction(!isRight);
         }
     }
+   
 
     public void ChangeDiriction(bool isRight)
     {
