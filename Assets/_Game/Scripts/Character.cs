@@ -9,14 +9,16 @@ public class Character : MonoBehaviour
     [SerializeField] protected CombatText CombatTextPrefab;
 
     private float hp;
+    private float maxHp;
     private string currentAnimName;
    public bool IsDead => hp <= 0;
 
     private void Start()
     {
+        maxHp = 100;
         OnInit();
     }
-
+ 
     public virtual void OnInit()
     {
         hp = 100;
@@ -49,6 +51,7 @@ public class Character : MonoBehaviour
         if(!IsDead)
         {
             hp -= damage;
+            Debug.Log(hp);
             if(IsDead)
             {
                 hp = 0;

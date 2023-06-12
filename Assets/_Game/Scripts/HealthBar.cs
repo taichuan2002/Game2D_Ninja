@@ -5,21 +5,28 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] Image imageFill;
-    [SerializeField] Vector3 offset;
+    [SerializeField] private Image imageFill;
+    [SerializeField] private Vector3 offset;
 
 
-    float hp;
-    float maxHp;
+    private float hp;
+    private float maxHp;
 
     private Transform target;
 
+    private void Start()
+    {
+        this.maxHp = 100;
+        this.hp = 100;
+    }
     void Update()
     {
         imageFill.fillAmount = Mathf.Lerp(imageFill.fillAmount,
             hp / maxHp, Time.deltaTime * 5f);
         transform.position = target.position + offset;
+        HealHp();
     }
+
 
     public void OnInit(float maxHp, Transform target)
     {
@@ -32,6 +39,19 @@ public class HealthBar : MonoBehaviour
     public void SetNewHp(float hp)
     {
         this.hp = hp;
+    }
+
+    public void HealHp()
+    {
+        this.hp += 10f * Time.deltaTime;
+        if (this.hp > maxHp)
+        {
+            this.hp = 100;
+        }
+        if (this.hp < 0)
+        {
+            this.hp = 0;
+        }
     }
 
 }
