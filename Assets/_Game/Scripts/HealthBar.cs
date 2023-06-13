@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
         this.maxHp = 100;
         this.hp = 100;
     }
-    void Update()
+    void FixedUpdate()
     {
         imageFill.fillAmount = Mathf.Lerp(imageFill.fillAmount,
             hp / maxHp, Time.deltaTime * 5f);
@@ -40,18 +40,21 @@ public class HealthBar : MonoBehaviour
     {
         this.hp = hp;
     }
-
     public void HealHp()
     {
-        this.hp += 10f * Time.deltaTime;
-        if (this.hp > maxHp)
+        if (hp < 100)
         {
-            this.hp = 100;
-        }
-        if (this.hp < 0)
-        {
-            this.hp = 0;
+            hp += 5f * Time.deltaTime;
+            if (hp > maxHp)
+            {
+                hp = 100;
+            }
+            if (hp < 0)
+            {
+                hp = 0;
+            }
         }
     }
+
 
 }

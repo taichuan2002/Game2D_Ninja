@@ -17,13 +17,21 @@ public class Character : MonoBehaviour
     {
         maxHp = 100;
         OnInit();
+        
     }
- 
+
+    private void FixedUpdate()
+    {
+        HealHp();
+    }
+
     public virtual void OnInit()
     {
         hp = 100;
         healthBar.OnInit(100, transform);
+
     }
+
 
     public virtual void OnDespawn()
     {
@@ -33,7 +41,6 @@ public class Character : MonoBehaviour
     protected virtual void OnDeath()
     {
         ChangeAnim("die");
-
         Invoke(nameof(OnDespawn), 2f);
     }
     protected void ChangeAnim(string animName)
@@ -51,8 +58,7 @@ public class Character : MonoBehaviour
         if(!IsDead)
         {
             hp -= damage;
-            Debug.Log(hp);
-            if(IsDead)
+            if (IsDead)
             {
                 hp = 0;
                 OnDeath();
@@ -63,5 +69,21 @@ public class Character : MonoBehaviour
         }
     }
 
-   
+    public void HealHp()
+    {
+        if (hp < 100)
+        {
+            hp += 5f * Time.deltaTime;
+            Debug.Log(hp);
+            if (hp > maxHp)
+            {
+                hp = 100;
+            }
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+        }
+    }
+
 }

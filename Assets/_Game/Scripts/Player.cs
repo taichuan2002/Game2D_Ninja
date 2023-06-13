@@ -229,7 +229,10 @@ public class Player : Character
     {
         ThrowPoint.SetActive(false);
     }
-
+    private void isCheckTele()
+    {
+        transform.position = new Vector2(transform.position.x + 30f, 6f);
+    }
     public void SetMove(float horizontal)
     {
         this.horizontal = horizontal;
@@ -250,6 +253,10 @@ public class Player : Character
             ChangeAnim("die");
 
             Invoke(nameof(OnInit), 1f);
+        }
+        if(collision.tag == "Tele")
+        {
+            Invoke(nameof(isCheckTele), 1f);
         }
     }
 
