@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : Character
@@ -9,6 +10,8 @@ public class Enemy : Character
     [SerializeField] private float moveSpeed;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject attackArea;
+    [SerializeField] private Kunai kunaiPrefab;
+    [SerializeField] private Transform throwPoint;
     private IState currentState;
 
     private bool isRight = true;
@@ -99,6 +102,7 @@ public class Enemy : Character
         ActiveAttack();
         Invoke(nameof(DeActiveAttack), 0.5f); 
     }
+    
 
     public bool IstargetInRange()
     {

@@ -55,6 +55,9 @@ public class HealthBar : MonoBehaviour
             }
         }
     }
+    public void ImortalPlayer()
+    {
 
+    }
 
 }

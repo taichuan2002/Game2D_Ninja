@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditorInternal;
 
 public class Player : Character
 {
@@ -24,6 +25,8 @@ public class Player : Character
     private bool isThrow = false;
     private bool isDeath = false;
     private float horizontal;
+    private float vertical;
+    
 
     private int coin = 0;
 
@@ -46,7 +49,9 @@ public class Player : Character
 
         isGrounded = CheckGrounded();
 
-        //horizontal = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
+        //vertical = Input.GetAxisRaw("Vertical");
+
 
        
 
@@ -59,7 +64,7 @@ public class Player : Character
             }
 
             //Jump
-            if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
 
                 Jump();
@@ -175,20 +180,17 @@ public class Player : Character
         Invoke(nameof(DeActiveThrow), 0.5f);
         Instantiate(kunaiPrefab, throwPoint.position,
             throwPoint.rotation);
-
     }
 
     private void ResetAttack()
     {
         ChangeAnim("ilde");
         isAttack = false;
-       
     }
     private void ResetThrow()
     {
         ChangeAnim("throw");
         isThrow = false;
-
     }
 
     public void Jump()
@@ -203,7 +205,6 @@ public class Player : Character
             ChangeAnim("jump");
             rb.AddForce(JumpForce * Vector2.up);
         }
-        
     }
 
 
@@ -231,12 +232,16 @@ public class Player : Character
     }
     private void isCheckTele()
     {
-        transform.position = new Vector2(transform.position.x + 30f, 6f);
+        transform.position = new Vector2(55f, 6f);
     }
     public void SetMove(float horizontal)
     {
         this.horizontal = horizontal;
     }
+    /*public void SetMove2(float vertical)
+    {
+        this.vertical = vertical;
+    }*/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Coin")
@@ -249,7 +254,6 @@ public class Player : Character
         if (collision.tag == "DeathZone")
         {
             isDeath = true;
-            //Destroy(transform.gameObject);
             ChangeAnim("die");
 
             Invoke(nameof(OnInit), 1f);
@@ -260,5 +264,12 @@ public class Player : Character
         }
     }
 
-   
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Wall")
+        {
+            
+        }
+    }
+
 }

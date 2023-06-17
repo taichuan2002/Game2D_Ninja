@@ -71,6 +71,7 @@
     <Compile Include="Assets\_Game\Scripts\StateMachine\IState.cs" />
     <Compile Include="Assets\_Game\Scripts\StateMachine\IdleState.cs" />
     <Compile Include="Assets\_Game\Scripts\Player.cs" />
+    <Compile Include="Assets\_Game\Scripts\BOSS\Data.cs" />
     <Compile Include="Assets\_Game\Scripts\CombatText.cs" />
     <Compile Include="Assets\_Game\Scripts\NextMapBoss.cs" />
   </ItemGroup>

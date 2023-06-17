@@ -15,7 +15,6 @@ public class NextMapBoss : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.SetActive(false);  // an? player
-
             ModeSelect();
         }
     }
@@ -28,7 +27,6 @@ public class NextMapBoss : MonoBehaviour
     IEnumerator LoadAfterDelay()
     {
         yield return new WaitForSeconds(delaySecond);
-
         SceneManager.LoadScene(nameScene);
     }
 }

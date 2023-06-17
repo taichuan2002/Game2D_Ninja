@@ -74,7 +74,6 @@ public class Character : MonoBehaviour
         if (hp < 100)
         {
             hp += 5f * Time.deltaTime;
-            Debug.Log(hp);
             if (hp > maxHp)
             {
                 hp = 100;
