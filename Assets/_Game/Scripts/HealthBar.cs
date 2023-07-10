@@ -57,10 +57,7 @@ public class HealthBar : MonoBehaviour
     }
     public void ImortalPlayer()
     {
-        if(hp < 30)
-        {
 
-        }
     }
 
 }
