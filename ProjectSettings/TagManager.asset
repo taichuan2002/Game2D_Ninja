@@ -8,6 +8,8 @@ TagManager:
   - DeathZone
   - EnemyWall
   - Enemy
+  - Tele
+  - Wall
   layers:
   - Default
   - TransparentFX
